@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bodywise 90-Day Companion</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+<style>
+:root{--bg:#FBF7F2;--bg2:#EFE8E0;--surface:#fff;--ink:#2B1B2E;--muted:#6B5A6E;--line:#E8DED6;--accent:#C4452E;--ai:#fff;--ok:#2F7A5C;--warn:#8A5A00;--danger:#B3261E;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1B1420;--bg2:#120D16;--surface:#261C2C;--ink:#F5EDF3;--muted:#BFB0C4;--line:#3A2D40;--accent:#FF8A73;--ai:#1B1420;--ok:#6FCF9F;--warn:#F2C46B;--danger:#FF9A92;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#1B1420;--bg2:#120D16;--surface:#261C2C;--ink:#F5EDF3;--muted:#BFB0C4;--line:#3A2D40;--accent:#FF8A73;--ai:#1B1420;--ok:#6FCF9F;--warn:#F2C46B;--danger:#FF9A92;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg2);color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif}
+#app{max-width:480px;min-height:100vh;margin:0 auto;background:var(--bg);display:flex;flex-direction:column}
+main{flex:1;padding:16px;display:flex;flex-direction:column;gap:12px;animation:in .25s ease-out}
+@keyframes in{from{opacity:0;transform:translateY(4px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+h1,h2{font-family:Fraunces,Georgia,serif;margin:0;line-height:1.2}h1{font-size:28px}h2{font-size:18px}p{margin:0}
+.m,small,.tag{color:var(--muted);font-size:14px}
+.ban{background:var(--ink);color:var(--bg);font-size:13px;text-align:center;padding:6px 12px}
+header{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;border-bottom:1px solid var(--line)}
+.logo{font-family:Fraunces,Georgia,serif}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 3px #0001;color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface);padding:8px 14px;cursor:pointer}
+button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pri{background:var(--accent);color:var(--ai);border-color:var(--accent);font-weight:600}.big{min-height:52px;font-size:18px}
+.sel{outline:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--surface))}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1}
+.chip{border-radius:99px;flex:0 0 auto}
+.bar{position:relative;height:10px;border-radius:9px;background:var(--line);margin:6px 0}.bar i{display:block;height:100%;border-radius:9px;background:var(--ok);transition:width .25s ease-out}.bar b{position:absolute;top:-5px;width:3px;height:20px;background:var(--accent)}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.danger{color:var(--danger)}
+.v{border-left:6px solid currentColor}.v h2,.v p,.v li,.v summary{color:var(--ink)}.v h2{color:inherit}
+.nums{display:flex;gap:8px;padding:0;margin:0;list-style:none;flex-wrap:wrap;font-size:14px}.nums li{background:var(--bg);border-radius:10px;padding:6px 10px}
+.pill{display:inline-block;border:1px solid currentColor;border-radius:99px;padding:0 10px;font-size:13px;font-weight:600}
+nav{position:sticky;bottom:0;display:flex;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav a{flex:1;text-align:center;padding:12px;color:var(--muted);text-decoration:none;min-height:44px}nav a[aria-current]{color:var(--accent);font-weight:600}
+.foot{text-align:center;padding:8px;font-size:13px;color:var(--muted)}
+.ov{position:fixed;inset:0;background:#0008;display:flex;align-items:flex-end;justify-content:center;z-index:20}
+.sh{background:var(--surface);width:100%;max-width:480px;max-height:90vh;overflow:auto;border-radius:20px 20px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px;animation:in .2s ease-out}
+#toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;max-width:90%;z-index:30;font-size:15px}#toast:empty{display:none}
+.tl{border-left:3px solid var(--line);margin-left:8px;padding-left:16px;display:flex;flex-direction:column;gap:12px}
+.tl .card.j{border:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--surface))}.tl .here{color:var(--accent);font-weight:600}
+details summary{cursor:pointer;min-height:32px}textarea,input[type=date]{font:inherit;width:100%;border:1px solid var(--line);border-radius:12px;padding:8px;background:var(--bg);color:var(--ink)}
+.led summary{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+:root{--bg:#FAF8F5;--surface:#F1EDE7;--ink:#1F1B20;--muted:#8A8289;--line:#E4DED6;--accent:#1F1B20;--ai:#FAF8F5;--ok:#5B8C74;--warn:#C08A3E;--danger:#B4493C}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#151317;--surface:#1F1B22;--ink:#F1EDF2;--muted:#8F8794;--line:#2C2630;--accent:#F1EDF2;--ai:#151317;--ok:#7DC2A1;--warn:#D9A65A;--danger:#E58A7C}}
+:root[data-theme=dark]{--bg:#151317;--surface:#1F1B22;--ink:#F1EDF2;--muted:#8F8794;--line:#2C2630;--accent:#F1EDF2;--ai:#151317;--ok:#7DC2A1;--warn:#D9A65A;--danger:#E58A7C}
+body,h1,h2,.logo,button,input,textarea{font-family:Inter,system-ui,sans-serif}
+body{background:var(--bg);font-size:15px}#app{display:block}b{font-weight:500}
+h1{font-size:26px;font-weight:500;letter-spacing:-.02em}h2{font-size:15px;font-weight:500}.logo{font-weight:500}
+main{display:grid;gap:16px;align-content:start;min-height:calc(100vh - 130px);padding:16px 20px}
+header{display:grid;grid-template-columns:1fr auto;border:0;padding:12px 20px}header .row{grid-template-columns:auto auto}
+.card{display:grid;background:var(--surface);border:0;box-shadow:none;border-radius:20px;padding:18px;gap:6px}
+button{border:0;background:var(--surface);border-radius:999px;min-height:48px}.pri{background:var(--accent);color:var(--ai)}
+.sel{background:var(--ink);color:var(--bg)}.sel .m{color:inherit;opacity:.7}.card.sel{border-radius:20px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+[aria-label=Rating]{grid-template-columns:repeat(5,1fr)}.row.m{grid-template-columns:1fr 1fr}
+.v{border:0}.pill{border:0;padding:0}.nums li{background:var(--bg)}
+nav{border:0;background:var(--bg)}nav a[aria-current]{color:var(--ink)}
+.sh{background:var(--bg);display:grid}.ov{background:#0006}a.card{text-align:center}
+.hero{display:grid;justify-items:center;text-align:center;gap:4px}.hero svg{width:min(230px,66vw);height:auto}main>svg{width:100%;height:auto}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.tiles div{background:var(--surface);border-radius:20px;padding:18px 6px;display:grid;justify-items:center;gap:8px;font-size:13px}
+.list{display:grid;gap:8px}.card.j{background:var(--ink);color:var(--bg)}.card.j .tag{color:inherit;opacity:.7}.here{color:var(--ink);font-size:13px}
+.card{background:none;padding:4px 0}.v,.card.j,button.card,a.card{background:var(--surface);padding:18px}a.card.pri{background:var(--accent)}button.card.sel{background:var(--ink)}
+.led{border-bottom:1px solid var(--line);border-radius:0;padding:12px 0}.tiles div{background:none}.list{gap:12px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--surface);border-radius:999px;padding:4px}.seg button{background:none;min-height:40px;padding:4px 6px;font-size:13px}.seg .sel{background:var(--ink)}
+.top{display:grid;grid-template-columns:1fr 48px;align-items:center}.x{display:grid;place-items:center;width:48px;height:48px;padding:0;border-radius:50%;color:inherit;background:none;text-decoration:none;justify-self:end}
+.i{vertical-align:-4px;margin-right:4px}.x .i,.tiles .i{margin:0}.pill .i{margin-right:4px}
+</style></head><body>
+<div id="app"></div><div id="toast" role="status" aria-live="polite"></div>
+<script>
+const K='bw90:v1',$=s=>document.querySelector(s);
+const P={'hair-serum':{n:'Hair Growth Serum',d:84,tag:'Published by Be Bodywise',g:{'less-hair-fall':['Less hair fall','How much hair fall are you noticing?','A lot','Very little'],'more-density':['More density','How does your hair density look to you?','Thinner','Fuller']}},
+'body-wash':{n:'Salicylic Acid Body Wash',d:56,tag:'Assumption, confirm',g:{'fewer-breakouts':['Fewer body breakouts','How are your breakouts?','Many','Few'],'smoother':['Smoother skin','How does your skin feel?','Rough','Smooth']}},
+'roll-on':{n:'Underarm Roll-On',d:56,tag:'Assumption, confirm',g:{'less-odour':['Less odour','How is odour control?','Poor','Great'],'even-tone':['More even tone','How does the underarm tone look?','Uneven','Even']}}};
+const FL=[['burning','Burning'],['severe-itch','Severe itching'],['rash','Rash'],['heavy-shedding','Sudden heavy shedding'],['swelling','Swelling'],['other','Something else']];
+const KV={start:['Getting started','leaf','m'],data:['Not enough data','dash','warn'],early:['Too early to judge','clock','warn'],on:['On track','chk','ok'],mixed:['Mixed, recheck soon','minus','warn'],doctor:['Talk to a doctor','alert','danger']};
+/* clock: dates are YYYY-MM-DD, compared as whole UTC days */
+const U=s=>{const[a,b,c]=s.split('-');return Date.UTC(+a,b-1,+c)/864e5};
+const add=(s,n)=>new Date((U(s)+n)*864e5).toISOString().slice(0,10),diff=(a,b)=>Math.round(U(a)-U(b));
+const dev=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const today=dev,fmt=s=>new Date(U(s)*864e5).toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'});
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const code=s=>{let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return h.toString(36).toUpperCase().padStart(6,'0').slice(-6)},rc=id=>'BW-'+code(id);
+/* verdict: first match wins */
+function verdict(R,C,t){const p=P[R.p],day=diff(t,R.start)+1,used=C.filter(c=>c.used),win=Math.min(14,day),age=c=>diff(t,c.date),
+wu=used.filter(c=>age(c)>=0&&age(c)<win).length,flag=C.some(c=>c.flags.length&&age(c)>=0&&age(c)<14),
+rs=used.filter(c=>c.rating).sort((a,b)=>a.date<b.date?-1:1).map(c=>c.rating),av=a=>a.reduce((x,y)=>x+y,0)/a.length,
+base=rs.length?av(rs.slice(0,3)):null,last=rs.length?av(rs.slice(-3)):null,jd=add(R.start,p.d),o={used:used.length,win,wu,base,last,jd,left:diff(jd,t)};
+if(flag)return{...o,k:'doctor',rule:1};if(used.length<3)return{...o,k:'start',rule:2};if(wu<.6*win)return{...o,k:'data',rule:3};
+if(o.left>0)return{...o,k:'early',rule:4};if(last-base>=.5)return{...o,k:'on',rule:5};return{...o,k:'mixed',rule:6,recheck:add(t,14)}}
+/* ledger */
+const st=e=>e.st==='credited'&&e.exp?(e.exp<today()?'expired':diff(e.exp,today())<=30?'expiring':'credited'):e.st;
+const live=()=>S.led.filter(e=>!['failed','reported','expired'].includes(st(e)));
+const bal=()=>live().reduce((a,e)=>a+e.amt,0),nextExp=()=>live().filter(e=>e.exp&&e.amt>0).sort((a,b)=>a.exp<b.exp?-1:1)[0];
+function ensure(id,date,amt,why,kind,fail){if(S.led.some(e=>e.id===id))return;const e={id,date,amt,why,kind,st:'credited',exp:add(date,180)};
+if(fail){e.st='failed';e.fr="Couldn't reach the rewards service"}else e.rc=rc(id);S.led.push(e);return e}
+function awards(failNew){const R=S.reg,t=today(),day=diff(t,R.start)+1;let f;
+S.ci.filter(c=>c.used).forEach(c=>{const e=ensure('c-'+R.p+c.date,c.date,10,'Check-in, '+P[R.p].n,'checkin',failNew&&S.demo.fail&&c.date===t);if(e&&e.st==='failed')f=e});
+for(let w=0;w*7<day;w++){const n=S.ci.filter(c=>c.used&&diff(c.date,R.start)>=w*7&&diff(c.date,R.start)<w*7+7).length;
+if(n>=5){const d=add(R.start,w*7+6);ensure('w-'+R.p+w,d<t?d:t,30,'Week done, '+P[R.p].n,'week')}}
+[30,60,90].forEach(m=>{if(day>=m)ensure('m-'+R.p+m,add(R.start,m-1),100,'Day '+m+' milestone, '+P[R.p].n,'milestone')});
+if(f){S.demo.fail=false;toast("We couldn't add your points just now ("+f.fr+"). Trying again...");setTimeout(()=>retry(f.id),2000)}return f}
+function retry(id){const e=S.led.find(x=>x.id===id);if(!e||e.st!=='failed')return;e.retried=true;
+if(S.demo.failRetry)toast('Still not in. Report this and we\'ll log it.');else{e.st='credited';e.rc=rc(id);delete e.fr;toast('Fixed. Your points are in, receipt '+e.rc+'.')}save();render()}
+/* state */
+const fresh=()=>({v:1,reg:null,ci:[],led:[],tk:[],stash:{},demo:{fail:false,failRetry:false},theme:'system'});
+let S,noStore=false,UI={f:'all',su:{p:'hair-serum',g:'less-hair-fall',d:today()},sheet:null,ck:null,ret:null};
+function load(){try{const j=JSON.parse(localStorage.getItem(K));if(j&&j.v===1&&Array.isArray(j.ci)&&Array.isArray(j.led)&&j.demo){j.stash=j.stash||{};return j}}catch(e){}return fresh()}
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){noStore=true}}
+function seed(N,L){const t=today(),keep=S.theme;S=fresh();S.theme=keep;S.reg={p:'hair-serum',g:'less-hair-fall',start:add(t,-(N-1))};
+const days=[];for(let i=1;i<N;i++)if(i%5)days.push(i);const m=days.length,e=L.reduce((a,b)=>a+b,0)/3;
+S.ci=days.map((i,k)=>({date:add(S.reg.start,i-1),used:true,flags:[],rating:k<3?2:k>=m-3?L[k-m+3]:Math.max(2,Math.round(2+(e-2)*(k-3)/Math.max(1,m-6)))}));
+awards(false);S.led.push({id:'welcome',date:add(t,-160),amt:150,why:'Welcome bonus from a previous order',kind:'welcome',st:'credited',exp:add(t,20),rc:rc('welcome')},
+{id:'redeem',date:add(t,-40),amt:-50,why:'Used on an order',kind:'redeem',st:'used',rc:rc('redeem')})}
+let toastT;function toast(m){const t=$('#toast');t.textContent=m;clearTimeout(toastT);toastT=setTimeout(()=>t.textContent='',4500)}
+const plant=(n,x)=>{let l='';for(let i=0;i<n;i++){const y=96-i*13,s=i%2?1:-1;l+=`<path d="M60 ${y}q${s*22} -2 ${s*26} -20q${-s*22} 2 ${-s*26} 20z" fill="var(--ok)" opacity=".${6+i%3}"/>`}
+return`<svg ${x||''} viewBox="0 0 120 120" aria-hidden=true><path d="M60 110V${96-n*13}" stroke="var(--ok)" stroke-width=3 stroke-linecap=round /><ellipse cx=60 cy=112 rx=24 ry=4 fill="var(--line)"/>${l}</svg>`};
+const ring=(day,jd,n)=>{const r=88,c=2*Math.PI*r,a=jd/90*2*Math.PI-Math.PI/2;return`<svg viewBox="0 0 200 200" role=img aria-label="Day ${day} of 90"><circle cx=100 cy=100 r=${r} fill=none stroke="var(--line)" stroke-width=4 /><circle cx=100 cy=100 r=${r} fill=none stroke="var(--ink)" stroke-width=4 stroke-linecap=round stroke-dasharray="${c*Math.min(1,day/90)} ${c}" transform="rotate(-90 100 100)"/><circle cx=${100+r*Math.cos(a)} cy=${100+r*Math.sin(a)} r=7 fill="var(--bg)" stroke="var(--warn)" stroke-width=3 />${plant(n,'x=45 y=45 width=110 height=110')}</svg>`};
+const IC={cal:'<path d="M5 9h14M8 4v3M16 4v3M5 6h14v14H5z"/>',chk:'<circle cx=12 cy=12 r=8.5 /><path d="m8.5 12.5 2.5 2.5 4.5-5"/>',rec:'<path d="M6 4h12v16l-3-2-3 2-3-2-3 2zM9 9h6M9 13h6"/>',x:'<path d="M6 6l12 12M18 6 6 18"/>',clock:'<circle cx=12 cy=12 r=8.5 /><path d="M12 7.5V12l3 2"/>',alert:'<path d="M12 4 3.5 19h17zM12 10v4M12 16.5v.5"/>',leaf:'<path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14zM5 19l8-8"/>',dash:'<circle cx=12 cy=12 r=8.5 stroke-dasharray="2 3" />',minus:'<circle cx=12 cy=12 r=8.5 /><path d="M8.5 12h7"/>',up:'<path d="M8 16l8-8M9 8h7v7"/>',send:'<path d="M4 12l16-8-5 16-3-6z"/>',plus:'<path d="M12 5v14M5 12h14"/>',copy:'<rect x=8 y=8 width=11 height=11 rx=2 /><path d="M5 15V6a1 1 0 0 1 1-1h9"/>',drop:'<path d="M12 4c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/>',bottle:'<path d="M10 3h4v3l2 2v11a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V8l2-2zM8 12h8"/>',roll:'<rect x=8 y=10 width=8 height=11 rx=2 /><circle cx=12 cy=6.5 r=3.5 />'};
+const ico=(k,s=26)=>`<svg class=i viewBox="0 0 24 24" width=${s} height=${s} fill=none stroke=currentColor stroke-width=1.5 stroke-linecap=round stroke-linejoin=round aria-hidden=true>${IC[k]}</svg>`;
+const coin=`<svg viewBox="0 0 120 80" aria-hidden=true>${[58,44,30].map(y=>`<ellipse cx=60 cy=${y} rx=38 ry=11 fill="var(--surface)" stroke="var(--warn)" stroke-width=2 />`).join('')}</svg>`;
+const trk=(L,day,jd)=>{const X=d=>10+d/90*280,x=X(Math.min(day,90));return`<svg viewBox="0 0 300 50" aria-hidden=true><line x1=10 x2=290 y1=32 y2=32 stroke="var(--line)" stroke-width=3 stroke-linecap=round /><line x1=10 x2=${x} y1=32 y2=32 stroke="var(--ink)" stroke-width=3 stroke-linecap=round />${L.map(m=>`<circle cx=${X(m[0])} cy=32 r=${m[0]===jd?7:4} fill="${m[0]===jd?'var(--warn)':'var(--bg)'}" stroke="${m[0]===jd?'var(--warn)':'var(--muted)'}" stroke-width=2 />`).join('')}<path d="M${x-5} 6h10l-5 10z" fill="var(--ink)"/></svg>`};
+const SN={'hair-serum':['Serum','drop'],'body-wash':['Body wash','bottle'],'roll-on':['Roll-on','roll']};
+const Switch=()=>`<div class=seg role=group aria-label=Product>${Object.keys(P).map(id=>{const on=S.reg.p===id;return`<button class="${on?'sel':''}" aria-pressed="${on}" data-a=swp data-v=${id}>${ico(SN[id][1],18)}${SN[id][0]}${on||S.stash[id]?'':ico('plus',14)}</button>`}).join('')}</div>`;
+const dots=(R,C,t)=>{const day=diff(t,R.start)+1,j=P[R.p].d;let s='';for(let i=1;i<=90;i++){const c=C.find(x=>x.date===add(R.start,i-1)),x=(i-1)%15*20+10,y=Math.floor((i-1)/15)*20+10;let f='none',o=1,k='var(--line)';if(c&&c.used){f='var(--ok)';o=.35+.13*(c.rating||3)}else if(c||i<day)k='var(--muted)';if(c&&c.flags.length){f='var(--danger)';o=1}
+s+=`<circle cx=${x} cy=${y} r=${i===j?7:5} fill="${f}" fill-opacity=${o} stroke="${i===j?'var(--warn)':i===day?'var(--ink)':k}" stroke-width=${i===j||i===day?2.5:1.2} />`}return`<svg viewBox="0 0 300 120" role=img aria-label="Your 90 days">${s}</svg>`};
+/* views */
+const route=()=>location.hash.replace('#/','')||'welcome';
+const n1=n=>n==null?'-':n.toFixed(1);
+function Welcome(){return`<div class=hero>${plant(4,'width=170 height=170')}</div><h1>Know when it's fair to judge.</h1><p class=m>A 90-day companion for slow-acting products.</p>
+<div class=tiles>${[['cal','Judge-by date'],['chk','Honest verdict'],['rec','Receipts']].map(([k,l])=>`<div>${ico(k)}${l}</div>`).join('')}</div>
+<button class="btn pri big" data-a=demo-start>Try the demo</button><button class=big data-a=fresh>Start fresh</button>
+`}
+function Setup(){const u=UI.su,p=P[u.p],jd=add(u.d,p.d);
+return`${S.reg?`<a class=x href="#/today" aria-label=Close>${ico('x',22)}</a>`:''}<h1>Set your judge-by date</h1><p class=m>Pick what you're using.</p>
+${Object.entries(P).map(([id,x])=>`<button class="card ${id===u.p?'sel':''}" style="text-align:left" aria-pressed="${id===u.p}" data-a=sp data-v=${id}><b>${x.n}</b><span class=m>Judge after ${x.d/7} weeks · ${x.tag}</span></button>`).join('')}
+<h2>Your main goal</h2><div class=row>${Object.entries(p.g).map(([id,g])=>`<button class="chip ${id===u.g?'sel':''}" aria-pressed="${id===u.g}" data-a=sg data-v=${id}>${g[0]}</button>`).join('')}</div>
+<p class=m>Each check-in will ask: "${p.g[u.g][1]}"</p><label>Start date<input type=date data-a=sd value="${u.d}"></label>
+<p><b>Fair to judge on ${fmt(jd)}.</b></p><button class="pri big" data-a=begin>Set my judge-by date</button>`}
+function Today(){const R=S.reg,t=today(),p=P[R.p],V=verdict(R,S.ci,t),day=diff(t,R.start)+1,g=p.g[R.g],[l,ic,c]=KV[V.k],done=S.ci.some(x=>x.date===t),nx=nextExp();
+const X={start:'Welcome in. Check in for a few days and we\'ll start reading your pattern.',data:`We can't read results yet: you've logged ${V.wu} of the last ${V.win} days. Want a fresh start?`,
+early:`Too early to say, and that's okay. This product usually needs about ${p.d/7} weeks.`,on:`Your check-ins show ${g[0].toLowerCase()} improving from ${n1(V.base)} to ${n1(V.last)}.`,
+mixed:`Your check-ins show little change so far. Worth talking to a doctor, and we'll look again on ${V.recheck&&fmt(V.recheck)}.`,doctor:'You flagged something. Please talk to a doctor before you continue.'}[V.k];
+const RU=['','You flagged a symptom in the last 14 days. This overrides everything else.','Fewer than 3 days used so far.',`Days used in the last ${V.win} days are under 60% (${V.wu} of ${V.win}).`,`Today is before your judge-by date, ${fmt(V.jd)}.`,'After the judge-by date, and your latest average is at least 0.5 above your baseline.','After the judge-by date, and your latest average is less than 0.5 above your baseline.'][V.rule];
+return`${Switch()}<h1>${p.n}</h1><p class=m>${g[0]}</p>
+<div class=hero>${ring(day,p.d,Math.max(1,Math.min(6,Math.floor(S.ci.filter(x=>x.used).length/8))))}<p><b>Day ${Math.min(day,90)}</b> <span class=m>of 90</span></p></div>
+<section class=card><h2>Fair to judge on ${fmt(V.jd)}</h2><p class=m>${V.left>0?V.left+' days to go':'That date has arrived'} · ${p.tag}</p></section>
+<section class="card v ${c}"><h2>${ico(ic,20)}${l}</h2><p>${X}</p>
+<ul class=nums><li>Days used <b>${V.used}</b></li><li>Last ${V.win} days <b>${V.wu}</b></li><li>Rating <b>${n1(V.base)} → ${n1(V.last)}</b></li></ul>
+<details><summary>Why am I seeing this?</summary><p>Rule ${V.rule}: ${RU}</p></details></section>
+<button class="pri big" data-a=ck>${done?ico('chk',20)+'Done today, edit':'Check in'}</button>
+<section><h2>Your 90 days</h2>${dots(R,S.ci,t)}<p class=m>Darker means a higher rating. The amber ring is your judge-by day.</p></section>
+<a class=card href="#/rewards"><b>${bal()} points</b><span class=m>${nx?nx.amt+' points expire on '+fmt(nx.exp)+'.':'Nothing expiring soon.'}</span></a>`}
+function Timeline(){const R=S.reg,p=P[R.p],t=today(),day=diff(t,R.start)+1,jd=p.d;
+const M=[[14,'Settling in','The routine matters more than results right now.','Assumption'],[30,'One month','Some people notice small changes by now; many don\'t yet. Keep checking in.','Assumption'],[60,'Two months','Changes, if any, are often still building.','Assumption'],[jd,'Fair to judge','Compare your first and latest ratings. This is the day your verdict can be read.',p.tag],[90,'Day 90','Look back at your own check-ins and decide what\'s next.','Assumption']];
+const L=[...new Map(M.map(m=>[m[0],m])).values()].sort((a,b)=>a[0]-b[0]);let placed=false;const out=[];
+L.forEach(m=>{if(!placed&&day<=m[0]){out.push(`<p class=here>You are here, day ${day}</p>`);placed=true}out.push(`<div class="card ${m[0]===jd?'j':''}"><b>Day ${m[0]}: ${m[1]}</b> <span>${fmt(add(R.start,m[0]-1))}</span><p>${m[2]}</p><span class=tag>${m[3]}</span></div>`)});
+if(!placed)out.push(`<p class=here>You are here, day ${day}</p>`);
+const rec=[...S.ci].sort((a,b)=>a.date<b.date?1:-1).slice(0,7);
+return`${Switch()}<h1>Timeline</h1><p class=m>Everyone's skin and hair differ. This is a guide, not a promise.</p>${trk(L,day,jd)}<div class=list>${out.join('')}</div><h2>Your recent check-ins</h2>
+${rec.length?rec.map(c=>`<div class=card><b>${fmt(c.date)}</b> ${c.used?'Used'+(c.rating?', rating '+c.rating:''):'Missed'}${c.flags.length?' · flagged: '+c.flags.join(', '):''}${c.note?`<span class=m>${esc(c.note)}</span>`:''}</div>`).join(''):'<p class=m>No check-ins yet. Your first one takes about 20 seconds.</p>'}`}
+const PI={credited:['chk','ok','Credited'],expiring:['clock','warn','Expiring soon'],used:['up','m','Used'],expired:['x','m','Expired'],failed:['alert','danger','Failed'],reported:['send','warn','Reported']};
+const WHY={checkin:'You logged a day of use. +10 points, once per day.',week:'You logged at least 5 of 7 days in a week.',milestone:'You reached a milestone day of your regimen.',welcome:'A welcome bonus from a previous order (mock).',redeem:'You used points on an order (mock).'};
+function Rewards(){const nx=nextExp(),F=UI.f,rows=[...S.led].sort((a,b)=>a.date<b.date?1:-1).filter(e=>F==='all'||(F==='expiring'&&st(e)==='expiring')||(F==='failed'&&['failed','reported'].includes(st(e))));
+return`<div class=hero>${coin}</div><h1>${bal()} points</h1><p class=m>${nx?nx.amt+' points expire on '+fmt(nx.exp)+'.':'Nothing expiring soon.'}</p>
+<div class=row role=group aria-label=Filter>${['all','expiring','failed'].map(f=>`<button class="chip ${F===f?'sel':''}" aria-pressed="${F===f}" data-a=flt data-v=${f}>${f[0].toUpperCase()+f.slice(1)}</button>`).join('')}</div>
+${rows.length?rows.map(e=>{const s=st(e),[i,c,w]=PI[s];return`<details class="card led"><summary><span><b>${esc(e.why)}</b><br><small>${fmt(e.date)}</small></span><span><b>${e.amt>0?'+':''}${e.amt}</b> <span class="pill ${c}">${ico(i,16)}${w}</span></span></summary>
+<p class=m>${WHY[e.kind]}</p>${e.rc?`<p>Receipt: <b>${e.rc}</b></p>`:''}${e.exp&&e.amt>0?`<p>Expires: ${fmt(e.exp)}</p>`:''}
+${s==='failed'?`<p class=danger>${e.fr}. ${e.retried?'Still not in. Report this and we\'ll log it.':'Trying again...'}</p><button data-a=report data-v=${e.id}>Report this</button>`:''}
+${s==='reported'?`<p>Logged as ${S.tk.find(k=>k.entryId===e.id)?.id}.</p>`:''}</details>`}).join(''):`<p class=m>${S.led.length?'Nothing here.':'No points yet. Your first check-in earns 10.'}</p>`}
+<p class=m>Balance equals the sum of the rows above (failed and expired rows are not counted).</p>
+<details class=card><summary><b>Rules</b></summary><p class=m>+10 per check-in with "Yes", once a day. +30 for a week with 5 of 7 days logged. +100 at day 30, 60 and 90. Points last 180 days; "expiring soon" means 30 days or fewer.</p></details>`}
+function Sheet(){const s=UI.sheet;if(!s)return'';let b,t;const R=S.reg,pn=R?P[R.p].n:'the product';
+if(s==='help'){t='Something feeling off?';b=`<p>Consider pausing ${pn} and talking to a doctor. Be Bodywise lists free online doctor consultations in its app.</p><a class="card pri" href="https://bebodywise.com" target=_blank rel=noopener>Open Be Bodywise</a>${R?`<button data-a=copy>${ico('copy',18)}Copy my check-in summary for the doctor</button>`:''}<p><b>If you have swelling of the face, lips or throat, or trouble breathing, get emergency care now.</b></p>`}
+else if(s==='demo'){t='Demo controls';const D=S.demo;b=`<div class=row>${[['1','Day 1'],['25','Day 25'],['45','Day 45'],['88u','Day 88 improved'],['88f','Day 88 flat']].map(([v,l])=>`<button data-a=seedj data-v=${v}>${l}</button>`).join('')}</div>
+<button data-a=flag>Log a symptom flag</button><button aria-pressed="${D.fail}" class="${D.fail?'sel':''}" data-a=tfail>Fail the next credit: ${D.fail?'on':'off'}</button><button aria-pressed="${D.failRetry}" class="${D.failRetry?'sel':''}" data-a=tretry>Make the retry fail too: ${D.failRetry?'on':'off'}</button>
+<button data-a=theme>Theme: ${S.theme}</button><button data-a=reset class=danger>Reset all data</button>`}
+else{const g=R.g&&P[R.p].g[R.g],c=UI.ck;t='Check in';b=`<h2>Did you use it today?</h2><div class=row><button class="big ${c.used===1?'sel':''}" data-a=used data-v=1>Yes</button><button class="big ${c.used===0?'sel':''}" data-a=used data-v=0>No</button></div>
+${c.used===1?`<h2>${g[1]}</h2><div class=row role=group aria-label=Rating>${[1,2,3,4,5].map(n=>`<button class="big ${c.rating===n?'sel':''}" aria-label="${n} of 5" data-a=rate data-v=${n}>${n}</button>`).join('')}</div><div class="row m"><span>1 = ${g[2]}</span><span style="text-align:right">5 = ${g[3]}</span></div>`:''}
+${c.used!==null?`<h2>Anything feel off?</h2><div class=row><button class="chip ${c.flags.length?'':'sel'}" aria-pressed="${!c.flags.length}" data-a=flg data-v=none>Nothing</button>${FL.map(([id,l])=>`<button class="chip ${c.flags.includes(id)?'sel':''}" aria-pressed="${c.flags.includes(id)}" data-a=flg data-v=${id}>${l}</button>`).join('')}</div>
+<label>Note (optional)<textarea maxlength=140 rows=2 data-a=note>${esc(c.note||'')}</textarea></label><button class="pri big" data-a=savec ${c.used===1&&!c.rating?'disabled':''}>Save</button>`:''}`}
+return`<div class=ov data-a=bg><div class=sh role=dialog aria-modal=true aria-label="${t}"><div class=top><h2>${t}</h2><button data-a=close class=x aria-label=Close>${ico('x',22)}</button></div>${b}</div></div>`}
+function render(){const a=document.activeElement,key=a&&a.dataset&&a.dataset.a?[a.dataset.a,a.dataset.v]:null,r=route(),tabs=['today','timeline','rewards'];
+document.documentElement.dataset.theme=S.theme==='system'?'':S.theme;if(S.theme==='system')delete document.documentElement.dataset.theme;
+let v=r;if(!S.reg&&(tabs.includes(r)))v='welcome';else if(r==='setup');else if(!tabs.includes(r))v=S.reg?'today':'welcome';
+const body={welcome:Welcome,setup:Setup,today:Today,timeline:Timeline,rewards:Rewards}[v]();
+$('#app').innerHTML=`<header><b class=logo>90-Day Companion</b><span class=row><button data-a=help>Help</button><button class=chip data-a=demo>Demo</button></span></header>
+${noStore?'<p class="card warn">Your browser blocked saving, so progress will reset when you close this page.</p>':''}<main>${body}</main>
+${S.reg&&tabs.includes(v)?`<nav aria-label=Main>${tabs.map(x=>`<a href="#/${x}" ${v===x?'aria-current=page':''}>${x[0].toUpperCase()+x.slice(1)}</a>`).join('')}</nav>`:''}${Sheet()}`;
+const sel=key&&key[0]!=='note'&&document.querySelector(`[data-a="${key[0]}"]${key[1]?`[data-v="${key[1]}"]`:''}`);
+if(UI.focus){const d=$('.sh');d&&(d.querySelector('button,a,textarea')||d).focus();UI.focus=false}else if(sel)sel.focus()}
+function open(s){UI.ret=document.activeElement&&document.activeElement.dataset.a?[document.activeElement.dataset.a,document.activeElement.dataset.v]:null;UI.sheet=s;UI.focus=true}
+function close(){UI.sheet=null;render();const k=UI.ret,e=k&&document.querySelector(`[data-a="${k[0]}"]`);e&&e.focus()}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||b.disabled||b.tagName==='TEXTAREA'||b.tagName==='INPUT')return;const a=b.dataset.a,v=b.dataset.v,t=today(),u=UI.su;
+if(a==='bg'){if(e.target===b)close();return}if(a==='close')return close();
+if(a==='help')open('help');else if(a==='demo')open('demo');
+else if(a==='demo-start'){seed(25,[2,2,3]);location.hash='#/today'}
+else if(a==='fresh'){location.hash='#/setup'}
+else if(a==='sp'){u.p=v;u.g=Object.keys(P[v].g)[0]}else if(a==='sg')u.g=v;
+else if(a==='begin'){if(S.reg)S.stash[S.reg.p]={reg:S.reg,ci:S.ci};delete S.stash[u.p];S.reg={p:u.p,g:u.g,start:u.d||t};S.ci=[];location.hash='#/today'}
+else if(a==='ck'){const c=S.ci.find(x=>x.date===t);UI.ck=c?{used:c.used?1:0,rating:c.rating||null,flags:[...c.flags],note:c.note||''}:{used:null,rating:null,flags:[],note:''};open('ck')}
+else if(a==='used')UI.ck.used=+v;else if(a==='rate')UI.ck.rating=+v;
+else if(a==='flg'){const f=UI.ck.flags;if(v==='none')UI.ck.flags=[];else f.includes(v)?f.splice(f.indexOf(v),1):f.push(v)}
+else if(a==='savec'){const c=UI.ck,n=document.querySelector('[data-a=note]');const had=S.led.some(x=>x.id==='c-'+S.reg.p+t),r={date:t,used:!!c.used,flags:c.flags};
+if(c.used)r.rating=c.rating;const nt=(n?n.value:c.note).trim();if(nt)r.note=nt;S.ci=S.ci.filter(x=>x.date!==t).concat(r);const f=awards(true);UI.sheet=c.flags.length?'help':null;UI.focus=!!c.flags.length;
+if(!r.used)toast('Missed days happen. Pick up tomorrow.');else if(!f)toast(had?'Saved. That\'s one more day on your side.':'Saved. +10 points, receipt '+S.led.find(x=>x.id==='c-'+S.reg.p+t).rc+'.')}
+else if(a==='copy'){const R=S.reg,V=verdict(R,S.ci,t),fl=S.ci.filter(c=>c.flags.length).map(c=>fmt(c.date)+': '+c.flags.join(', ')).join('; ')||'none',tx=`${P[R.p].n}, started ${fmt(R.start)}. Days used: ${V.used}. Ratings (${P[R.p].g[R.g][0]}): ${n1(V.base)} to ${n1(V.last)}. Symptom flags: ${fl}.`;(navigator.clipboard?navigator.clipboard.writeText(tx):Promise.reject()).then(()=>toast('Summary copied.'),()=>toast("Couldn't copy."))}
+else if(a==='swp'){if(v===S.reg.p)return;if(S.stash[v]){S.stash[S.reg.p]={reg:S.reg,ci:S.ci};const o=S.stash[v];delete S.stash[v];S.reg=o.reg;S.ci=o.ci}else{u.p=v;u.g=Object.keys(P[v].g)[0];u.d=t;location.hash='#/setup';return}}
+else if(a==='flt')UI.f=v;
+else if(a==='report'){const e=S.led.find(x=>x.id===v),id='T-'+code(v+t);S.tk.push({id,entryId:v,date:t});e.st='reported';toast('Logged as '+id+'.')}
+else if(a==='seedj'){seed(v==='1'?1:+v.slice(0,2),{1:[2,2,2],25:[2,2,3],45:[3,3,3],'88u':[4,4,3],'88f':[2,2,3]}[v]);UI.sheet=null;location.hash='#/today'}
+else if(a==='flag'){if(!S.reg)seed(25,[2,2,3]);const c=S.ci.find(x=>x.date===t);c?c.flags.includes('other')||c.flags.push('other'):S.ci.push({date:t,used:false,flags:['other']});UI.sheet='help'}
+else if(a==='tfail')S.demo.fail=!S.demo.fail;else if(a==='tretry')S.demo.failRetry=!S.demo.failRetry;
+else if(a==='theme')S.theme={system:'light',light:'dark',dark:'system'}[S.theme];
+else if(a==='reset'){try{localStorage.removeItem(K)}catch(x){}S=fresh();UI.sheet=null;location.hash='#/welcome';toast('Everything cleared.')}
+save();render()});
+document.addEventListener('change',e=>{if(e.target.dataset.a==='sd'){UI.su.d=e.target.value||today();render()}});
+document.addEventListener('keydown',e=>{if(!UI.sheet)return;if(e.key==='Escape')return close();if(e.key==='Tab'){const f=[...$('.sh').querySelectorAll('button:not([disabled]),a,textarea')];if(!f.length)return;const i=f.indexOf(document.activeElement);
+if(e.shiftKey&&i<=0){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus()}}});
+addEventListener('hashchange',render);
+S=load();try{localStorage.setItem('bw90:t','1');localStorage.removeItem('bw90:t')}catch(e){noStore=true}
+if(!location.hash)location.hash=S.reg?'#/today':'#/welcome';render();
+</script></body></html>
